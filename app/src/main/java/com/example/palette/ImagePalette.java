@@ -3,6 +3,9 @@ package com.example.palette;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,11 +26,25 @@ public class ImagePalette extends AppCompatActivity {
     private TextView darkMutedTextView;
     private TextView lightMutedTextView;
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        // Aplica la animación de 'fade in' para la actividad que entra y 'slide out' para esta actividad que sale
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Solicita la característica de transiciones de contenido antes de llamar a setContentView
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
+        // Configura la animación de entrada Fade
+        Fade fade = new Fade();
+        fade.setDuration(1000); // Duración de la animación en milisegundos
+        getWindow().setEnterTransition(fade);
+
         setContentView(R.layout.activity_image_palette);
 
         // Obtén la imagen seleccionada del Intent
@@ -37,12 +54,20 @@ public class ImagePalette extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView);
         imageView.setImageResource(selectedImage);
 
-        // Inicializa las variables de los TextViews
-        lightVibrantTextView = findViewById(R.id.lightVibrantTextView);
-        mutedTextView = findViewById(R.id.mutedTextView);
-        darkMutedTextView = findViewById(R.id.darkMutedTextView);
-        lightMutedTextView = findViewById(R.id.lightMutedTextView);
+        // Configura el nombre de transición para la imagen
+        String transitionName = getIntent().getStringExtra("transition_name");
+        imageView.setTransitionName(transitionName);
 
+        // Configura la transición de elementos compartidos
+        Transition transition = TransitionInflater.from(this)
+                .inflateTransition(R.transition.change_image_transform);
+        getWindow().setSharedElementEnterTransition(transition);
+
+        // Inicializa las variables de los TextViews
+        TextView lightVibrantTextView = findViewById(R.id.lightVibrantTextView);
+        TextView mutedTextView = findViewById(R.id.mutedTextView);
+        TextView darkMutedTextView = findViewById(R.id.darkMutedTextView);
+        TextView lightMutedTextView = findViewById(R.id.lightMutedTextView);
 
         // Crea un objeto Bitmap de la imagen
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), selectedImage);

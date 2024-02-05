@@ -18,6 +18,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:transitionName="@string/nombre_transicion_imagen"
         android:scaleType="fitCenter" />
 
     <!-- TextViews para mostrar los demás colores -->
