@@ -6,12 +6,46 @@
     android:orientation="vertical"
     tools:context=".ImagePalette">
 
+    <!-- Toolbar para mostrar el color vibrant -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- ImageView con tamaño fijo -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:scaleType="fitCenter" />
 
-    <!-- Puedes agregar más elementos según tus necesidades -->
+    <!-- TextViews para mostrar los demás colores -->
+    <TextView
+        android:id="@+id/lightVibrantTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Light Vibrant" />
+
+    <TextView
+        android:id="@+id/mutedTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Muted" />
+
+    <TextView
+        android:id="@+id/darkMutedTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dark Muted" />
+
+    <TextView
+        android:id="@+id/lightMutedTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Light Muted" />
+
+
 
 </LinearLayout>
+
