@@ -3,6 +3,7 @@ package com.example.palette;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
@@ -41,9 +42,10 @@ public class ImagePalette extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         // Configura la animación de entrada Fade
-        Fade fade = new Fade();
-        fade.setDuration(1000); // Duración de la animación en milisegundos
-        getWindow().setEnterTransition(fade);
+        //Fade fade = new Fade();
+        Explode explode= new Explode();
+        explode.setDuration(1000); // Duración de la animación en milisegundos
+        getWindow().setEnterTransition(explode);
 
         setContentView(R.layout.activity_image_palette);
 
